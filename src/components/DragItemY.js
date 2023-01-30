@@ -1,25 +1,24 @@
 import React from "react";
-import { useDrop } from "react-dnd";
+import { useDrop, useDrag } from "react-dnd";
 
 const DragItemY = ({ node, list, setList, children, depth }) => {
   const [{ isOver }, drop] = useDrop(() => ({
     accept: "stringType",
     drop: (item, monitor) => {
-      console.log("DropNode:");
-      console.log(node);
-      //   console.log("DragItem");
-      //   console.log(item);
+      //   console.log("DropNode:");
+      //   console.log(node);
+      //   console.log(monitor.didDrop());
 
-      //const updateNode = list.find((item) => item.id === node.id);
-      //   const updateNodeChildren = updateNode.children;
-      //   updateNodeChildren.push(item);
+      if (monitor.didDrop()) {
+        return setList([...list]);
+      }
 
-      //   const newNode = [...item];
-      //   newNode.children;
       item.id = Math.random();
-      setTimeout(() => {
-        setList([...list, node.children.push(item)]);
-      }, 2000);
+      const newItem = { ...item };
+      newItem.children = [];
+
+      setList([...list, node.children.push(newItem)]);
+      console.log("----------");
     },
     collect: (monitor) => ({
       isOver: !!monitor.isOver(),

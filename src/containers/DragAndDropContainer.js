@@ -8,14 +8,18 @@ const DragAndDropContainer = () => {
     { id: 2, name: "item2", children: [] },
     { id: 3, name: "item3", children: [] },
   ]);
-  const [rightData, setRightData] = useState([
-    { id: 4, name: "item4", children: [] },
-  ]);
+  const [rightData, setRightData] = useState([]);
+  const [counter, setCounter] = useState(0);
 
   return (
     <div style={{ display: "flex" }}>
       <LeftList list={leftData} setList={setLeftData} />
-      <RightList list={rightData} setList={setRightData} />
+      <RightList
+        list={rightData}
+        setList={setRightData}
+        counter={counter}
+        setCounter={setCounter}
+      />
     </div>
   );
 };
