@@ -8,12 +8,6 @@ const RightList = ({ list, setList }) => {
     () => ({
       accept: "stringType",
       drop: (item, monitor) => {
-        // console.log(monitor.canDrop());
-        // console.log(counter);
-        //console.log(list);
-        // const x = Math.random();
-        // console.log(x);
-        // setCounter(x);
         if (monitor.didDrop()) {
           return setList([...list]);
         }
@@ -62,3 +56,11 @@ const RightList = ({ list, setList }) => {
 };
 
 export default RightList;
+
+/// within useDrop hook
+// console.log(monitor.canDrop());
+// console.log(counter);
+//console.log(list);
+// const x = Math.random();
+// console.log(x);
+// setCounter(x);

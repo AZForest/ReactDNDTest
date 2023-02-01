@@ -2,6 +2,13 @@ import React from "react";
 import { useDrop, useDrag } from "react-dnd";
 
 const DragItemY = ({ node, list, setList, children, depth }) => {
+  const [{ isDragging }, drag] = useDrag(() => ({
+    type: "stringType",
+    item: node,
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  }));
   const [{ isOver }, drop] = useDrop(() => ({
     accept: "stringType",
     drop: (item, monitor) => {
@@ -26,18 +33,20 @@ const DragItemY = ({ node, list, setList, children, depth }) => {
   }));
 
   return (
-    <div ref={drop}>
-      <div
-        style={{
-          marginLeft: `${depth * 100}px`,
-          backgroundColor: "red",
-          height: "100px",
-          width: "100px",
-        }}
-      >
-        {node.name}
+    <div ref={drag}>
+      <div ref={drop}>
+        <div
+          style={{
+            marginLeft: `${depth * 100}px`,
+            backgroundColor: "red",
+            height: "100px",
+            width: "100px",
+          }}
+        >
+          {node.name}
+        </div>
+        {children}
       </div>
-      {children}
     </div>
   );
 };
